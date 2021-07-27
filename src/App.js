@@ -1,13 +1,17 @@
 import logo from './logo.svg';
 import './App.css';
+import NavBar from './components/NavBar';
+import Login from './components/Login';
 
 function App() {
   return (
     <div className="App">
+      <NavBar></NavBar>
+      <Login/>
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Mi Primer proyecto de react Tomas Lanterna
         </p>
         <a
           className="App-link"
