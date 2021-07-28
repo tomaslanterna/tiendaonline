@@ -4,6 +4,7 @@ import Accordion from '@material-ui/core/Accordion';
 import { Toolbar, IconButton, Typography, Button, MenuItem,Menu } from '@material-ui/core';
 import {MenuIcon} from "@material-ui/icons/Menu";
 import * as Mui from '@material-ui/core';
+import CartWidget from './CartWidget';
 
 
 
@@ -22,6 +23,7 @@ function NavBar() {
                 <Button color="inherit">Login</Button>
                 <Button color="inherit">Catalogo de Productos</Button>
                 <Button color="inherit">Mis Compras</Button>
+                <CartWidget/>
             </Toolbar>
         </AppBar>
     )
