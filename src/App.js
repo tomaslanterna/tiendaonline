@@ -4,6 +4,7 @@ import NavBar from './components/NavBar';
 import Login from './components/Login';
 import ItemListContainer from './components/ItemListContainer';
 import ItemCount from './components/ItemCount';
+import Item from './components/Item';
 
 
 function App() {
@@ -12,6 +13,7 @@ function App() {
       <NavBar/>
       <ItemListContainer nombre="Tomas" apellido="Lanterna"/>
       <ItemCount stock="4" initial="2"/>
+      
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
