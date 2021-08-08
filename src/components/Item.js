@@ -18,7 +18,7 @@ const useStyles = makeStyles((theme) => ({
     flex: '1 0 auto',
   },
   cover: {
-    width: 151,
+    width: 130,
   },
   controls: {
     display: 'flex',
@@ -33,6 +33,7 @@ function Item({item}) {
   const theme = useTheme();
 
   return (
+    <>
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
@@ -40,10 +41,10 @@ function Item({item}) {
             {item.title}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            {item.id}
+            Id : {item.id}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            {item.price}
+            Precio : {item.price}
           </Typography>
         </CardContent>
         <div className={classes.controls}>
@@ -56,6 +57,7 @@ function Item({item}) {
         title="Product"
       />
     </Card>
+    </>
   );
 }
 

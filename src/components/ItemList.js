@@ -1,8 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
 import Item from './Item';
+import { List,ListItem } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,7 +15,7 @@ function ItemList({ Items }) {
     const classes = useStyles();
     return (
         <List className={classes.root}>
-            {(Items==null || Items.length==0)? <ListItem>No hay</ListItem>:Items.map(Item=><ListItem><Item item={Item}/></ListItem>)}
+            {(Items==null || Items.length==0)? <ListItem>No hay</ListItem>:Items.map(it=><ListItem><Item item={it}/></ListItem>)}
             </List>
             )
 }
