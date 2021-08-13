@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import PS5 from '../images/PS5.jpg';
+import ItemCount from './ItemCount';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -12,13 +13,17 @@ const useStyles = makeStyles((theme) => ({
   },
   details: {
     display: 'flex',
-    flexDirection: 'column',
+    flexDirection: 'row',
+    width: 1500,
+    height:150
   },
   content: {
     flex: '1 0 auto',
   },
   cover: {
-    width: 130,
+    display: 'flex',
+    flexDirection: 'row',
+    width: 200,
   },
   controls: {
     display: 'flex',
@@ -28,12 +33,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Item({item}) {
+function Item({ item }) {
   const classes = useStyles();
   const theme = useTheme();
 
   return (
-    <>
+
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
@@ -41,23 +46,19 @@ function Item({item}) {
             {item.title}
           </Typography>
           <Typography variant="subtitle1" color="textSecondary">
-            Id : {item.id}
-          </Typography>
-          <Typography variant="subtitle1" color="textSecondary">
             Precio : {item.price}
           </Typography>
+        <ItemCount stock="4" initial="2"/>
         </CardContent>
-        <div className={classes.controls}>
-          
-        </div>
-      </div>
-      <CardMedia
+        <CardMedia
         className={classes.cover}
         image={item.url}
-        title="Product"
-      />
+        title="Product"/>
+      </div>
+      
+
     </Card>
-    </>
+
   );
 }
 

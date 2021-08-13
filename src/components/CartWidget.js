@@ -17,7 +17,7 @@ function CartWidget() {
     return (
         <>
             <Button color="inherit">
-                <img src={carrito} alt=""/>
+                <img src={carrito} alt="Cart"/>
                 <StyledBadge badgeContent={4} color="secondary"></StyledBadge>
             </Button>
         </>
