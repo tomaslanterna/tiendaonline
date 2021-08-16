@@ -1,17 +1,25 @@
 import {useEffect,useState} from 'react'
 import ItemListContainer from './ItemListContainer';
-import Carrusel from './Carrusel';
 import PS5 from '../images/PS5.jpg';
 import PS4 from '../images/PS4.jpg';
 import PS3 from '../images/PS3.jpg';
 import PS2 from '../images/PS2.jpg';
 import PS1 from '../images/PS1.jpg';
+import { Grid } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core';
 
+const useStyles = makeStyles((theme) => ({
+    root: {
+        marginTop:4,
+      justifyContent:'center'
+    }
+  }));
     
 
 function Content() {
     const [loading, setLoading] = useState(false);
     const [items,setItems]=useState([]);
+    const classes = useStyles();
 
     useEffect(()=>{
 
@@ -54,10 +62,9 @@ function Content() {
         }).catch((error)=>console.log("error",error));*/
     },[])
     return (
-        <div>
-            <Carrusel itemData={items}/>
+        <Grid className={classes.root} alignItems='center'>
             <ItemListContainer itemData={items}/>  
-        </div>
+        </Grid>
     )
 }
 

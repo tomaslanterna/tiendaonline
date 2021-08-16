@@ -8,12 +8,7 @@ function ItemListContainer({itemData}) {
 
     
     return (
-        <>
-        <Grid container item xs={12} spacing={3} alignItems='center'>
             <ItemList Items={itemData}/> 
-        </Grid>
-        </>
-        
     )
 }
 
