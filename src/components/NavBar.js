@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import CartWidget from './CartWidget';
 import SlideMenu from './SlideMenu';
 import Prueba from './Prueba';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,7 +29,7 @@ function NavBar() {
         <Toolbar>
           <SlideMenu/>
           <Typography variant="h6"  className={classes.title}>
-            Tienda Online
+            <NavLink to={{pathname:"/home"}}>Tienda Online</NavLink>
           </Typography>
           <CartWidget/>
         </Toolbar>

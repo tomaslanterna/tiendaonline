@@ -55,8 +55,8 @@ function SlideMenu() {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        {['Inicio', 'Login', 'Productos', 'Logout'].map((text, index) => (
-          <NavLink exact to={'/'+text}>
+        {['Home', 'Login', 'Category', 'Logout'].map((text, index) => (
+          <NavLink exact to={'/'+text.toLowerCase()}>
           <ListItem button key={text}>
             <ListItemIcon>{index === 0 ? <HomeIcon /> : index===1 ?<LockOpenIcon/>: index===2 ?<AppsIcon/>:<ExitToAppIcon/>}</ListItemIcon>
             <ListItemText primary={text} />   

@@ -21,7 +21,7 @@ function ItemList({ Items }) {
     return (
       
         <List className={classes.root}>
-            {(Items==null || Items.length==0)? <ListItem>No hay</ListItem>:Items.map(it=><ListItem><NavLink activeClassName="active" to="/itemDetails"><Item item={it}/></NavLink></ListItem>)}
+            {(Items==null || Items.length==0)? <ListItem>No hay</ListItem>:Items.map(it=><ListItem><NavLink activeClassName="active" to={{pathname:"/item-details/"+it.id}}><Item item={it}/></NavLink></ListItem>)}
             </List>
       
             )

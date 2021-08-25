@@ -48,7 +48,7 @@ function Item({ item }) {
           <Typography variant="subtitle1" color="textSecondary">
             Precio : {item.price}
           </Typography>
-        <ItemCount stock="4" initial="2"/>
+        {/*<ItemCount stock="4" initial="2"/>*/}
         </CardContent>
         <CardMedia
         className={classes.cover}
