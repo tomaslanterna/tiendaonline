@@ -7,11 +7,12 @@ function ItemDetailContainer() {
     const [itemDetail, setitemDetail] = useState({});
     const {idProduct}=useParams();
     const {idCategory}=useParams();
+    const categorias=[...productosJson.categorias];
 
     useEffect(() => {
         const task = new Promise((resolve, reject) => {
-                setTimeout(() => (resolve(productosJson.categorias.filter((cat)=>cat.productos.filter((prod)=>prod.id===idProduct)), 2000)));     
-        }).then((data)=>setitemDetail(data[0]));
+                setTimeout(() => (resolve(categorias.find((cat)=>cat.id==idCategory), 2000)));     
+        }).then((data)=>setitemDetail(data.productos.find((prod)=>prod.id===idProduct)));
     }, [])
 
     return (

@@ -16,7 +16,7 @@ function ItemListContainer() {
 
     
     return (
-            <ItemList Items={category}/> 
+            <ItemList Items={category} idCategory={id}/> 
     )
 }
 

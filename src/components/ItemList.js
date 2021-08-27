@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function ItemList({ Items }) {
+function ItemList({ Items,idCategory }) {
     const classes = useStyles();
     return (
       
         <List className={classes.root}>
-            {(Items==null || Items.length==0)? <ListItem>No hay</ListItem>:Items.map(it=><ListItem><NavLink activeClassName="active" to={{pathname:"/item-details/"+it.id}}><Item item={it}/></NavLink></ListItem>)}
+            {(Items==null || Items.length==0)? <ListItem>No hay</ListItem>:Items.map(it=><ListItem><NavLink activeClassName="active" to={{pathname:"/item-details/"+idCategory+"/"+it.id}}><Item item={it}/></NavLink></ListItem>)}
             </List>
       
             )

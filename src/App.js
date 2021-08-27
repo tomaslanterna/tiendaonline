@@ -19,7 +19,7 @@ function App() {
           <Route exact to path="/home" component={Content}/>
             <Route exact to path="/" component={Content}/>
             <Route path="/category/:id" component={ItemListContainer} />
-            <Route path="/item-details/:idProd" component={ItemDetailContainer} />
+            <Route exact to path="/item-details/:idCategory/:idProduct" component={ItemDetailContainer} />
             <Route path="/login" component={Login} />
           </Switch>
         </section>
