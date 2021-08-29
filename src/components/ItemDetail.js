@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ItemCount from './ItemCount';
+import Button from '@material-ui/core/Button';
+import { NavLink } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +52,11 @@ const useStyles = makeStyles((theme) => ({
 
 function ItemDetail({ itemDet }) {
   const classes = useStyles();
+  const [showButton, setShowButton] = useState(false);
+
+  const onAdd=(cant)=>{
+    setShowButton(true);
+  }
 
 
   return (
@@ -66,9 +73,10 @@ function ItemDetail({ itemDet }) {
             className={classes.cover}
             image={itemDet.url}
             title="Product" />
+            {showButton ? <Button><NavLink exact to={"/cart"}>Finalizar Compra</NavLink></Button> :
             <div className={classes.count}>
-            <ItemCount stock="4" initial="2" />
-            </div>
+            <ItemCount stock="4" initial="2" onAdd={onAdd}/>
+            </div>}
         </div>
       </Card>
       <Card className={classes.root2}>

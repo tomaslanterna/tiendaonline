@@ -1,11 +1,26 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
 
-function CategoryType({SportWear,id}) {
+const useStyles = makeStyles((theme) => ({
+
+    root: {
+
+        borderRadius:80,
+        marginTop:10
+
+    }
+
+
+}));
+
+function CategoryType({ img, id }) {
+    const classes = useStyles();
     return (
         <div>
-            <p>Categoria para elegir</p>
-            <NavLink to={{pathname:"/category/"+id}}><img src={SportWear} alt="Category"/></NavLink>
+            <NavLink to={{ pathname: "/category/" + id }}>         
+                <img src={img} alt="Category" className={classes.root} width={800} height={350}/>                
+            </NavLink>
         </div>
     )
 }

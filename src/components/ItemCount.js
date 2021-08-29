@@ -16,26 +16,15 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function ItemCount({ stock, initial, onAdd }) {
+function ItemCount({ stock, initial, onAdd}) {
   const classes = useStyles();
   const [cont, setCont] = useState(0);
-  const [addCart, setaddCart] = useState({});
   const stock1 = parseInt(stock);
   const inicio = parseInt(initial);
   
   useEffect(() => {
     setCont(inicio);
   }, []);
-
-  /*useEffect(()=>{
-    //Consulta para crear el carrito y levantarlo
-
-
-  },[addCart]);*/
-
-
-
-
   return (
 
     <div className={classes.root}>
@@ -44,7 +33,7 @@ function ItemCount({ stock, initial, onAdd }) {
           {(cont == 0 && cont <= inicio) ? <Button disabled="true">-</Button> : <Button onClick={() => setCont(cont - 1)}>-</Button>}
           {(cont == stock1) ? <Button disabled="true">+</Button> : <Button onClick={() => setCont(cont + 1)}>+</Button>}
         </ButtonGroup>
-        <Button size="small" variant="contained" color="primary"/*onClick={setaddCart({cant :cont,prod:"producto" })}*/>Agregar al Carrito</Button>
+        <Button size="small" variant="contained" color="primary" onClick={onAdd}>Agregar al Carrito</Button>
     </div>
 
   );

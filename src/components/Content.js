@@ -1,11 +1,10 @@
-import {useEffect,useState} from 'react'
-import ItemListContainer from './ItemListContainer';
+import {useEffect,useState} from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import productosJson from '../productosJson';
 import Carrusel from './Carrusel';
-import CategoryType from './CategoryType';
-import SportWear from '../images/SportWear.jpg'
+import CategorysContainer from './CategorysContainer';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,8 +42,7 @@ function Content() {
     return (
         <Grid className={classes.root} alignItems='center'>
             <Carrusel/>
-            <CategoryType img={SportWear} id={"1"}/>
-            <CategoryType img={SportWear} id={"2"}/>
+            <CategorysContainer/>
         </Grid>
     )
 }
