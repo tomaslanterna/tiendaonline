@@ -24,6 +24,7 @@ function ItemCount({ stock, initial, onAdd}) {
   
   useEffect(() => {
     setCont(inicio);
+    onAdd(cont);
   }, []);
   return (
 

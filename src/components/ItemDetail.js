@@ -53,9 +53,11 @@ const useStyles = makeStyles((theme) => ({
 function ItemDetail({ itemDet }) {
   const classes = useStyles();
   const [showButton, setShowButton] = useState(false);
+  const [cant, setCant] = useState(0);
 
   const onAdd=(cant)=>{
     setShowButton(true);
+    setCant(cant);
   }
 
 
