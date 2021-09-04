@@ -7,6 +7,8 @@ import ItemDetailContainer from './components/ItemDetailContainer';
 import ItemListContainer from './components/ItemListContainer';
 import CategorysContainer from './components/CategorysContainer';
 import Cart from './components/Cart';
+import { collection, getDocs } from 'firebase/firestore';
+import {getData} from './firebase/index';
 
 
 

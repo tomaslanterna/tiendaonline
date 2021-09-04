@@ -7,6 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import ItemCount from './ItemCount';
 import Button from '@material-ui/core/Button';
 import { NavLink } from 'react-router-dom';
+import cartContext from './CartContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,9 +56,16 @@ function ItemDetail({ itemDet }) {
   const [showButton, setShowButton] = useState(false);
   const [cant, setCant] = useState(0);
 
+  const { products, setProducts, cart, setCart } = useContext(
+    cartContext
+  );
+
   const onAdd=(cant)=>{
-    setShowButton(true);
+    /*setShowButton(true);*/
     setCant(cant);
+    const cartDraft=[...cart];
+    cartDraft.push({item:itemDet,count:cant});
+    setCart(cartDraft);
   }
 
 
@@ -77,7 +85,7 @@ function ItemDetail({ itemDet }) {
             title="Product" />
             {showButton ? <Button><NavLink exact to={"/cart"}>Finalizar Compra</NavLink></Button> :
             <div className={classes.count}>
-            <ItemCount stock="4" initial="2" onAdd={onAdd}/>
+            <ItemCount onAdd={onAdd}/>
             </div>}
         </div>
       </Card>
