@@ -1,12 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState,useContext} from 'react';
 import { makeStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ItemCount from './ItemCount';
-import Button from '@material-ui/core/Button';
-import { NavLink } from 'react-router-dom';
 import cartContext from './CartContext';
 
 const useStyles = makeStyles((theme) => ({
@@ -53,19 +51,15 @@ const useStyles = makeStyles((theme) => ({
 
 function ItemDetail({ itemDet }) {
   const classes = useStyles();
-  const [showButton, setShowButton] = useState(false);
   const [cant, setCant] = useState(0);
+  const {addItem}=useContext(cartContext);
+  console.log(itemDet);
 
-  const { products, setProducts, cart, setCart } = useContext(
-    cartContext
-  );
 
   const onAdd=(cant)=>{
     /*setShowButton(true);*/
     setCant(cant);
-    const cartDraft=[...cart];
-    cartDraft.push({item:itemDet,count:cant});
-    setCart(cartDraft);
+    addItem(itemDet);
   }
 
 
@@ -81,12 +75,9 @@ function ItemDetail({ itemDet }) {
           </CardContent>
           <CardMedia
             className={classes.cover}
-            image={itemDet.url}
+            image={itemDet.imgUrl}
             title="Product" />
-            {showButton ? <Button><NavLink exact to={"/cart"}>Finalizar Compra</NavLink></Button> :
-            <div className={classes.count}>
             <ItemCount onAdd={onAdd}/>
-            </div>}
         </div>
       </Card>
       <Card className={classes.root2}>

@@ -27,11 +27,13 @@ function NavBar() {
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <SlideMenu/>
-          <Typography variant="h6"  className={classes.title}>
-            <NavLink to={{pathname:"/home"}}>Tienda Online</NavLink>
+          <SlideMenu />
+          <Typography variant="h6" className={classes.title}>
+            <NavLink to={{ pathname: "/home" }}>Tienda Online</NavLink>
           </Typography>
-          <CartWidget/>
+          <NavLink exact to={"/cart"}>
+            <CartWidget />
+          </NavLink>
         </Toolbar>
       </AppBar>
     </div>

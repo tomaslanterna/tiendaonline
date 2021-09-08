@@ -8,7 +8,8 @@ import ItemListContainer from './components/ItemListContainer';
 import CategorysContainer from './components/CategorysContainer';
 import Cart from './components/Cart';
 import { collection, getDocs } from 'firebase/firestore';
-import {getData} from './firebase/index';
+import { getData } from './firebase/index';
+import { CartProvider } from './components/CartContext'
 
 
 
@@ -16,20 +17,22 @@ import {getData} from './firebase/index';
 function App() {
   return (
     <div className="App">
-      <Router>
-        <section>
-          <NavBar />
-          <Switch>
-          <Route exact to path="/home" component={Content}/>
-            <Route exact to path="/" component={Content}/>
-            <Route path="/category/:id" component={ItemListContainer} />
-            <Route path="/category" component={CategorysContainer} />
-            <Route exact to path="/item-details/:idCategory/:idProduct" component={ItemDetailContainer} />
-            <Route path="/login" component={Login} />
-            <Route path="/cart" component={Cart} />
-          </Switch>
-        </section>
-      </Router>
+      <CartProvider>
+        <Router>
+          <section>
+            <NavBar />
+            <Switch>
+              <Route exact to path="/home" component={Content} />
+              <Route exact to path="/" component={Content} />
+              <Route path="/category/:id" component={ItemListContainer} />
+              <Route path="/category" component={CategorysContainer} />
+              <Route exact to path="/item-details/:idProduct" component={ItemDetailContainer} />
+              <Route path="/login" component={Login} />
+              <Route path="/cart" component={Cart} />
+            </Switch>
+          </section>
+        </Router>
+      </CartProvider>
     </div>
   );
 }

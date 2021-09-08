@@ -5,29 +5,31 @@ import ItemList from './ItemList';
 import productosJson from '../productosJson';
 import { useParams } from 'react-router-dom';
 import { getData } from '../firebase';
+import { collection, getDocs, query, where } from '@firebase/firestore';
 
 function ItemListContainer() {
     const [category, setCategory] = useState([]);
-    const {id}=useParams();
-    /*useEffect(() => {
-        const task = new Promise((resolve, reject) => {
-                setTimeout(() => (resolve(productosJson.categorias.find((cat)=>cat.id===id))),2000);     
-        }).then((data)=>setCategory(data.productos));
-    }, [])*/
+    const { id } = useParams();
     useEffect(() => {
-        const getCategory=async()=>{
-            const categoryCollection=collection(getData,'products').where('categoryId','==',id);
-            const categorySnapshot = await getDocs(categoryCollection);
-            const categoryList=categorySnapshot.docs.map(doc=>doc.data());
-            console.log(categoryList);
-            setCategory(categoryList);
+        const getCategory = async () => {
+            const db = getData();
+            const categoryRef = collection(db, 'products');
+            const categoryQuery = query(categoryRef, where('categoryId', '==', id));
+            try {
+                const categorySnapshot = await getDocs(categoryQuery);
+                const categoryList = categorySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
+                console.log(categoryList);
+                setCategory(categoryList);
+            } catch(e){
+                console.log(e);
+            }
         };
         getCategory();
     }, []);
 
-    
+
     return (
-            <ItemList Items={category} idCategory={id}/> 
+        <ItemList Items={category}/>
     )
 }
 

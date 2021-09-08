@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Item from './Item';
 import { List,ListItem, Grid} from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -16,12 +16,12 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function ItemList({ Items,idCategory }) {
+function ItemList({ Items}) {
     const classes = useStyles();
     return (
       
         <List className={classes.root}>
-            {(Items==null || Items.length==0)? <ListItem>No hay</ListItem>:Items.map(it=><ListItem><NavLink activeClassName="active" to={{pathname:"/item-details/"+idCategory+"/"+it.id}}><Item item={it}/></NavLink></ListItem>)}
+            {(Items==null || Items.length==0)? <ListItem>No hay</ListItem>:Items.map(it=><ListItem><Item item={it}/></ListItem>)}
             </List>
       
             )

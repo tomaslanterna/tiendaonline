@@ -15,7 +15,7 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AppsIcon from '@material-ui/icons/Apps';
-import { NavLink, Switch } from 'react-router-dom';
+import { NavLink} from 'react-router-dom';
 
 const useStyles = makeStyles((theme)=>({
   list: {
@@ -34,8 +34,7 @@ function SlideMenu() {
   const [path,setPath]=useState('');
   const [swip, setSwipState] = useState([
     { left: false }
-  ]
-  );
+  ]);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -45,7 +44,7 @@ function SlideMenu() {
     setSwipState({ ...swip, [anchor]: open });
   };
 
-  const list = (anchor) => (
+ const list = (anchor) => (
     <div
       className={clsx(classes.list, {
         [classes.fullList]: anchor === 'top' || anchor === 'bottom',
@@ -54,6 +53,7 @@ function SlideMenu() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
+   
       <List>
         {['Home', 'Login', 'Category', 'Logout'].map((text, index) => (
           <NavLink exact to={'/'+text.toLowerCase()}>
