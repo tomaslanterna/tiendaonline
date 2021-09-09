@@ -55,10 +55,10 @@ function SlideMenu() {
     >
    
       <List>
-        {['Home', 'Login', 'Category', 'Logout'].map((text, index) => (
+        {['Home', 'Category'].map((text, index) => (
           <NavLink exact to={'/'+text.toLowerCase()}>
           <ListItem button key={text}>
-            <ListItemIcon>{index === 0 ? <HomeIcon /> : index===1 ?<LockOpenIcon/>: index===2 ?<AppsIcon/>:<ExitToAppIcon/>}</ListItemIcon>
+            <ListItemIcon>{index === 0 ? <HomeIcon /> : <AppsIcon/>}</ListItemIcon>
             <ListItemText primary={text} />   
           </ListItem>
           </NavLink>

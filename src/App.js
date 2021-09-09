@@ -2,7 +2,6 @@ import './App.css';
 import NavBar from './components/NavBar';
 import Content from './components/Content';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import Login from './components/Login';
 import ItemDetailContainer from './components/ItemDetailContainer';
 import ItemListContainer from './components/ItemListContainer';
 import CategorysContainer from './components/CategorysContainer';
@@ -27,7 +26,6 @@ function App() {
               <Route path="/category/:id" component={ItemListContainer} />
               <Route path="/category" component={CategorysContainer} />
               <Route exact to path="/item-details/:idProduct" component={ItemDetailContainer} />
-              <Route path="/login" component={Login} />
               <Route path="/cart" component={Cart} />
             </Switch>
           </section>

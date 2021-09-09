@@ -31,7 +31,7 @@ function ItemCount({ stock, initial, onAdd}) {
           {(cont == 0 && cont <= inicio) ? <Button disabled="true">-</Button> : <Button onClick={() => setCont(cont - 1)}>-</Button>}
           {(cont == stock1) ? <Button disabled="true">+</Button> : <Button onClick={() => setCont(cont + 1)}>+</Button>}
         </ButtonGroup>
-        <Button size="small" variant="contained" color="primary" onClick={onAdd}>Agregar al Carrito</Button>
+        <Button size="small" variant="contained" color="primary" onClick={()=>onAdd(cont)}>Agregar al Carrito</Button>
     </div>
 
   );

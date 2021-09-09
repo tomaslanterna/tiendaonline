@@ -44,7 +44,7 @@ function Item({ item }) {
 
   const onAdd=(cant)=>{
     setCant(cant);
-    addItem(item);
+    addItem({count:cant,item:item});
     }
 
 

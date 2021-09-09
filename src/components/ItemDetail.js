@@ -53,13 +53,10 @@ function ItemDetail({ itemDet }) {
   const classes = useStyles();
   const [cant, setCant] = useState(0);
   const {addItem}=useContext(cartContext);
-  console.log(itemDet);
-
 
   const onAdd=(cant)=>{
-    /*setShowButton(true);*/
     setCant(cant);
-    addItem(itemDet);
+    addItem({count:cant,item:itemDet});
   }
 
 
@@ -81,8 +78,8 @@ function ItemDetail({ itemDet }) {
         </div>
       </Card>
       <Card className={classes.root2}>
-        <Typography variant="subtitle1" color="textSecondary">
-          <h3>Detalles :</h3>
+        <Typography variant="subtitle1 h3" color="textSecondary">
+          Detalles :
         </Typography>
         <p>{itemDet.details}</p>
       </Card>

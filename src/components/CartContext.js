@@ -1,34 +1,33 @@
-import {React,createContext,useState} from 'react';
+import React,{createContext,useState} from 'react';
 
-const checkItem=(list,item)=>{
-    const itemFound=list.find(it=>it.id===item.id);
+const checkItem=(list,itemCart)=>{
+    const itemFound=list.find(it=>it.item.id===itemCart.item.id);
     if(itemFound){
         itemFound.count++;
     }else{
         list.push({
-            ...item,
-            count:1
+            ...itemCart
         });
     }
+    return list;
 };
 
 const cartContext=createContext({});
 
 export const CartProvider = ({children}) => {
 
-    const [products, setProducts] = useState([]);
     const [cart, setCart] = useState([]);
 
     const addItem=(item)=>{
         const cartDraft=[...cart];
-        const cleanCart=checkItem(cartDraft,item);
+        const cleanCart=checkItem(cartDraft,item)
         setCart(cleanCart);
         console.log(cleanCart);
     }
 
-    const removeItem=(item)=>{
+    const removeItem=(itemId)=>{
         const cartDraft=[...cart];
-        const cleanCart=cartDraft.filter(it=>it.id!==item.id);
+        const cleanCart=cartDraft.filter(it=>it.item.id!==itemId);
         setCart(cleanCart);
     }
 
