@@ -3,7 +3,7 @@ import React,{createContext,useState} from 'react';
 const checkItem=(list,itemCart)=>{
     const itemFound=list.find(it=>it.item.id===itemCart.item.id);
     if(itemFound){
-        itemFound.count++;
+        itemFound.count=itemFound.count+itemCart.count;
     }else{
         list.push({
             ...itemCart
