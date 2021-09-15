@@ -4,11 +4,11 @@ import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Card from '@material-ui/core/Card';
-import { Button, CardContent,CardMedia,Typography } from '@material-ui/core';
+import { Button, CardContent, CardMedia, Typography } from '@material-ui/core';
 import { NavLink } from 'react-router-dom';
-import { collection, addDoc,Timestamp } from "firebase/firestore";
+import { collection, addDoc, Timestamp, getDocs, query} from "firebase/firestore";
 import { getData } from '../firebase';
-import { FormControl,TextField } from '@material-ui/core';
+import { FormControl, TextField } from '@material-ui/core';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -28,10 +28,10 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const getTotal=(cart)=>{
-  let total=0;
-  cart.forEach(it=>{
-    total+=(it.item.price*it.count);
+const getTotal = (cart) => {
+  let total = 0;
+  cart.forEach(it => {
+    total += (it.item.price * it.count);
   });
   return total;
 }
@@ -41,56 +41,76 @@ const getTotal=(cart)=>{
 const Cart = () => {
 
   const classes = useStyles();
-  const { cart,removeItem } = useContext(cartContext);
-  const [user,setUser]=useState({});
+  const db = getData();
+  const { cart, removeItem } = useContext(cartContext);
+  const [user, setUser] = useState({
+    name: 'Tomas',
+    surname: 'Lanterna',
+    email: 'tomaslanterna@gmail.com'
+  });
 
-  const handleBuy= async()=>{
-    const db=getData();
-    const orderCollection=collection(db,'orders');
-    const orderRef=await addDoc(orderCollection,{
-      buyer:user,
-      items:cart,
-      date:Timestamp.fromDate(new Date()),
-      total:getTotal(cart)
-    });
+
+  const getOrderId = async () => {
+    const orderRef = collection(db, 'orders');
+    const orderQuery = query(orderRef);
+    try {
+      const orderSnapshot = await getDocs(orderQuery);
+      const orders = orderSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+      return alert("Orden realizada, id :"+orders[0].id);
+    } catch (e) {
+      console.log(e);
+      return alert("Error a realizar la orden");
+    }
   }
 
-  const ListCartItems=({list})=>{
-    return(list.map(it=>
+  const handleBuy = async () => {
+
+    const orderCollection = collection(db, 'orders');
+    const orderRef = await addDoc(orderCollection, {
+      buyer: user,
+      items: cart,
+      date: Timestamp.fromDate(new Date()),
+      total: getTotal(cart)
+    });
+    getOrderId();
+  }
+
+  const ListCartItems = ({ list }) => {
+    return (list.map(it =>
       <Card>
-      <CardContent>
-      <List>
-        <ListItem><Typography>{it.item.title}</Typography></ListItem>
-        <ListItem><Typography>Detalles:{it.item.details}</Typography></ListItem>
-        <ListItem>Precio:{it.item.price}</ListItem>
-        <ListItem>Cantidad seleccionado:{it.count}</ListItem>
-        <ListItem><Button onClick={() => removeItem(it.item.id)}>Borrar del carrito</Button></ListItem>
-      </List>
-      <CardMedia
-      className={classes.cover}
-      image={it.item.imgUrl}
-      title="Product"/>
-      </CardContent>
-    </Card>));
+        <CardContent>
+          <List>
+            <ListItem><Typography>{it.item.title}</Typography></ListItem>
+            <ListItem><Typography>Detalles:{it.item.details}</Typography></ListItem>
+            <ListItem>Precio:{it.item.price}</ListItem>
+            <ListItem>Cantidad seleccionado:{it.count}</ListItem>
+            <ListItem><Button onClick={() => removeItem(it.item.id)}>Borrar del carrito</Button></ListItem>
+          </List>
+          <CardMedia
+            className={classes.cover}
+            image={it.item.imgUrl}
+            title="Product" />
+        </CardContent>
+      </Card>));
   }
   return (
     <>
-    {cart.length>0 ? 
-    <>
-    <ListCartItems list={cart}/>
-    <Typography>Total a pagar: {getTotal(cart)}</Typography>
-    <Button onClick={handleBuy}>Finalizar Compra</Button>
-    </>
-  :
-    <Card>
-    <CardContent>
-    <List>
-      <ListItem><Typography>Carrito Vacio</Typography></ListItem>
-      <ListItem><Typography>Su carrito esta vacio debe agregar un item</Typography></ListItem>
-      <ListItem><NavLink to={{pathname:"/home"}}><Button>Volver a comprar</Button></NavLink></ListItem>
-    </List>
-    </CardContent>
-  </Card>}
+      {cart.length > 0 ?
+        <>
+          <ListCartItems list={cart} />
+          <Typography>Total a pagar: {getTotal(cart)}</Typography>
+          <Button onClick={handleBuy}>Finalizar Compra</Button>
+        </>
+        :
+        <Card>
+          <CardContent>
+            <List>
+              <ListItem><Typography>Carrito Vacio</Typography></ListItem>
+              <ListItem><Typography>Su carrito esta vacio debe agregar un item</Typography></ListItem>
+              <ListItem><NavLink to={{ pathname: "/home" }}><Button>Volver a comprar</Button></NavLink></ListItem>
+            </List>
+          </CardContent>
+        </Card>}
     </>
   )
 }
