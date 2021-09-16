@@ -22,14 +22,15 @@ function ItemCount({ stock, initial, onAdd}) {
   
   useEffect(() => {
     setCont(0);
+    
   }, []);
   return (
 
     <div className={classes.root}>
         <span>{cont}</span>
         <ButtonGroup className="ms-2"size="small" disableElevation variant="outlined" color="primary">
-          {(cont == 0 && cont <= inicio) ? <Button disabled="true">-</Button> : <Button onClick={() => setCont(cont - 1)}>-</Button>}
-          {(cont == stock1) ? <Button disabled="true">+</Button> : <Button onClick={() => setCont(cont + 1)}>+</Button>}
+          {(cont == 0) ? <Button disabled="true">-</Button> : <Button onClick={() => setCont(cont - 1)}>-</Button>}
+          {(cont == stock1) ? <Button disabled="true">No hay mas en stock</Button> : <Button onClick={() => setCont(cont + 1)}>+</Button>}
         </ButtonGroup>
         <Button size="small" variant="contained" color="primary" onClick={()=>onAdd(cont)}>Agregar al Carrito</Button>
     </div>

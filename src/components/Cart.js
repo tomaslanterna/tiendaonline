@@ -5,7 +5,7 @@ import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Card from '@material-ui/core/Card';
 import { Button, CardContent, CardMedia, Typography } from '@material-ui/core';
-import { NavLink } from 'react-router-dom';
+import { NavLink,useHistory } from 'react-router-dom';
 import { collection, addDoc, Timestamp, getDocs, query} from "firebase/firestore";
 import { getData } from '../firebase';
 import { FormControl, TextField } from '@material-ui/core';
@@ -40,9 +40,10 @@ const getTotal = (cart) => {
 
 const Cart = () => {
 
+  const history=useHistory();
   const classes = useStyles();
   const db = getData();
-  const { cart, removeItem } = useContext(cartContext);
+  const { cart, removeItem,cleanCart } = useContext(cartContext);
   const [user, setUser] = useState({
     name: 'Tomas',
     surname: 'Lanterna',
@@ -56,7 +57,8 @@ const Cart = () => {
     try {
       const orderSnapshot = await getDocs(orderQuery);
       const orders = orderSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-      return alert("Orden realizada, id :"+orders[0].id);
+      alert("Orden realizada, id :"+orders[0].id);
+      return history.push("/");
     } catch (e) {
       console.log(e);
       return alert("Error a realizar la orden");
@@ -72,6 +74,7 @@ const Cart = () => {
       date: Timestamp.fromDate(new Date()),
       total: getTotal(cart)
     });
+    cleanCart();
     getOrderId();
   }
 
@@ -99,7 +102,7 @@ const Cart = () => {
         <>
           <ListCartItems list={cart} />
           <Typography>Total a pagar: {getTotal(cart)}</Typography>
-          <Button onClick={handleBuy}>Finalizar Compra</Button>
+          <NavLink to={{ pathname: "/"}}><Button onClick={handleBuy}>Finalizar Compra</Button></NavLink>
         </>
         :
         <Card>

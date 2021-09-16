@@ -1,4 +1,4 @@
-import React, { useState,useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles, useTheme } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -38,14 +38,18 @@ const useStyles = makeStyles((theme) => ({
 function Item({ item }) {
   const classes = useStyles();
   const [cant, setCant] = useState(0);
-  const {addItem}=useContext(cartContext);
+  const { addItem } = useContext(cartContext);
   console.log(item);
 
 
-  const onAdd=(cant)=>{
-    setCant(cant);
-    addItem({count:cant,item:item});
+  const onAdd = (cant) => {
+    if (cant <= 0) {
+      return alert("No se puede agregar item neutro o negativo")
+    } else {
+      setCant(cant);
+      addItem({ count: cant, item: item });
     }
+  }
 
 
   return (
@@ -61,7 +65,7 @@ function Item({ item }) {
           <Typography variant="subtitle1" color="textSecondary">
             Precio : {item.price}
           </Typography>
-          <ItemCount onAdd={onAdd}/>
+          <ItemCount onAdd={onAdd} stock={item.stock}/>
         </CardContent>
         <CardMedia
           className={classes.cover}

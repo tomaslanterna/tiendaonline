@@ -1,4 +1,4 @@
-import React, { useState,useContext} from 'react';
+import React, { useState, useContext } from 'react';
 import { makeStyles } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,14 +12,14 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     width: 850,
     height: 300,
-    marginTop:10
+    marginTop: 10
   },
   root2: {
     display: 'flex',
     flexDirection: 'column',
     width: 850,
     height: 150,
-    marginTop:10
+    marginTop: 10
   },
   details: {
     display: 'flex',
@@ -52,11 +52,15 @@ const useStyles = makeStyles((theme) => ({
 function ItemDetail({ itemDet }) {
   const classes = useStyles();
   const [cant, setCant] = useState(0);
-  const {addItem}=useContext(cartContext);
+  const { addItem } = useContext(cartContext);
 
-  const onAdd=(cant)=>{
-    setCant(cant);
-    addItem({count:cant,item:itemDet});
+  const onAdd = (cant) => {
+    if (cant <= 0) {
+      return alert("No se puede agregar item neutro o negativo")
+    } else {
+      setCant(cant);
+      addItem({ count: cant, item: itemDet });
+    }
   }
 
 
@@ -74,7 +78,7 @@ function ItemDetail({ itemDet }) {
             className={classes.cover}
             image={itemDet.imgUrl}
             title="Product" />
-            <ItemCount onAdd={onAdd}/>
+          <ItemCount onAdd={onAdd} stock={itemDet.stock}/>
         </div>
       </Card>
       <Card className={classes.root2}>

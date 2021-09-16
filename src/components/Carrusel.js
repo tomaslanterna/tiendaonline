@@ -5,6 +5,8 @@ import ImageListItem from '@material-ui/core/ImageListItem';
 import ImageListItemBar from '@material-ui/core/ImageListItemBar';
 import IconButton from '@material-ui/core/IconButton';
 import StarBorderIcon from '@material-ui/icons/StarBorder';
+import { getData } from '../firebase';
+import { collection, getDocs, query, where } from '@firebase/firestore';
 import PS5 from '../images/PS5.jpg';
 import PS4 from '../images/PS4.jpg';
 import PS3 from '../images/PS3.jpg';
@@ -38,54 +40,31 @@ const useStyles = makeStyles((theme) => ({
 function Carrusel() {
   const classes = useStyles();
   const [itemData,setItemData]=useState([]);
+  const db=getData();
 
   useEffect(()=>{
-
-    const task = new Promise((resolve, reject) => {
-        /*setLoading(true);*/
-
-        const fetchits={
-            data:[
-                {title:'Play Station 5',id:5,price:1200,url:PS5},
-                {title:'Play Station 4',id:4,price:400,url:PS4},
-                {title:'Play Station 3',id:3,price:200,url:PS3},
-                {title:'Play Station 2',id:2,price:100,url:PS2},
-                {title:'Play Station 1',id:1,price:50,url:PS1},
-                {title:'Play Station 5',id:5,price:1200,url:PS5},
-                {title:'Play Station 4',id:4,price:400,url:PS4},
-                {title:'Play Station 3',id:3,price:200,url:PS3},
-                {title:'Play Station 2',id:2,price:100,url:PS2},
-                {title:'Play Station 1',id:1,price:50,url:PS1},
-                {title:'Play Station 5',id:5,price:1200,url:PS5},
-                {title:'Play Station 4',id:4,price:400,url:PS4},
-                {title:'Play Station 3',id:3,price:200,url:PS3},
-                {title:'Play Station 2',id:2,price:100,url:PS2},
-                {title:'Play Station 1',id:1,price:50,url:PS1}
-            ],
-            status:200
-        };
-        
-        if(fetchits.status==200){
-            setTimeout(() => (fetchits), 2000);
-            setItemData(fetchits.data);
-            resolve(fetchits.data);
-        }else{
-            reject("No se encontro los productos");
+    const getProducts= async()=>{
+      const productsRef=collection(db,'products');
+        const productsQuery=query(productsRef,where('stock', '<=', 5));
+        try{
+          const productsSnapshot= await getDocs(productsQuery);
+          const productsList=productsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
+          console.log(productsList);
+          setItemData(productsList);
+        }catch(e){
+          console.log(e);
         }
-    });
-    /*task.then((fetchitsResponse)=>{Esto seria cuando utilicemos el fetch verdadero
-        console.log();
-        setLoading(false);
-        setItems(fetchitsResponse);
-    }).catch((error)=>console.log("error",error));*/
+    }
+    getProducts();
 },[])
+
 
   return (
     <div className={classes.root}>
       <ImageList className={classes.imageList} cols={3.5}>
         {itemData.map((item) => (
           <ImageListItem key={item.img}>
-            <img src={item.url} alt={item.title} />
+            <img src={item.imgUrl} alt={item.title} />
             <ImageListItemBar
               title={item.title}
               classes={{

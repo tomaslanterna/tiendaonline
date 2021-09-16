@@ -8,7 +8,8 @@ import CategorysContainer from './components/CategorysContainer';
 import Cart from './components/Cart';
 import { collection, getDocs } from 'firebase/firestore';
 import { getData } from './firebase/index';
-import { CartProvider } from './components/CartContext'
+import { CartProvider } from './components/CartContext';
+import Subirarchivos from './components/Subirarchivos';
 
 
 
@@ -27,6 +28,7 @@ function App() {
               <Route path="/category" component={CategorysContainer} />
               <Route exact to path="/item-details/:idProduct" component={ItemDetailContainer} />
               <Route path="/cart" component={Cart} />
+              <Route path="/update" component={Subirarchivos} />
             </Switch>
           </section>
         </Router>
