@@ -3,10 +3,12 @@ import { useParams } from 'react-router-dom';
 import ItemDetail from './ItemDetail';
 import { collection, getDocs, query} from '@firebase/firestore';
 import { getData } from '../firebase';
+import Loader from './Loader';
 
 function ItemDetailContainer() {
     const [itemDetail, setitemDetail] = useState({});
     const {idProduct}=useParams();
+    const [loading,setLoading]=useState(true);
 
     useEffect(() => {
         const getItemDetail = async () => {
@@ -21,13 +23,14 @@ function ItemDetailContainer() {
             } catch(e){
                 console.log(e);
             }
+            setLoading(false);
         };
         getItemDetail();
     }, [])
 
     return (
         <div>
-            <ItemDetail itemDet={itemDetail}/>
+            {(Object.entries(itemDetail).length==0)?<Loader condition={loading}/>:<ItemDetail itemDet={itemDetail}/>}
         </div>
     )
 }

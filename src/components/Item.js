@@ -4,10 +4,9 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
-import PS5 from '../images/PS5.jpg';
 import ItemCount from './ItemCount';
 import { NavLink } from 'react-router-dom';
-import cartContext from './CartContext';
+import cartContext from '../contexts/CartContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {

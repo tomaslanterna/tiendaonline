@@ -9,6 +9,7 @@ import { collection, getDocs, query, where } from '@firebase/firestore';
 
 function ItemListContainer() {
     const [category, setCategory] = useState([]);
+    const [loading,setLoading]=useState(true);
     const { id } = useParams();
     useEffect(() => {
         const getCategory = async () => {
@@ -23,13 +24,14 @@ function ItemListContainer() {
             } catch(e){
                 console.log(e);
             }
+            setLoading(false);
         };
         getCategory();
     }, []);
 
 
     return (
-        <ItemList Items={category}/>
+        <ItemList Items={category} condition={loading}/>
     )
 }
 

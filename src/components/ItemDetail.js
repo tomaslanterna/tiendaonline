@@ -5,7 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import ItemCount from './ItemCount';
-import cartContext from './CartContext';
+import cartContext from '../contexts/CartContext';
 
 const useStyles = makeStyles((theme) => ({
   root: {

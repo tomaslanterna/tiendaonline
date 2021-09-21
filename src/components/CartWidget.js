@@ -3,7 +3,7 @@ import carrito from '../images/cart4.png'
 import { Button } from '@material-ui/core';
 import { Badge } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import cartContext from './CartContext';
+import cartContext from '../contexts/CartContext';
 
 const StyledBadge = withStyles((theme) => ({
     badge: {

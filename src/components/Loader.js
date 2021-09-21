@@ -1,20 +1,20 @@
 import {useEffect,useState} from 'react';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-function Load({condition}){
+const Load=({condition})=>{
     return (
         <>
         {condition!==false ? <CircularProgress/> : <h2>No cargado</h2>}
         </>
     );
 } 
-function Loader({loading}) {
+const Loader=({loading})=>{
 
-    const [load, setLoad] = useState(initialState)
+    const [load, setLoad] = useState(false)
 
     useEffect(() => {
         setTimeout(()=>{
-            setLoad(false);
+            setLoad(true);
         },3000)
     }, [])
 

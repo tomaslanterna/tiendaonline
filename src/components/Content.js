@@ -1,48 +1,56 @@
-import {useEffect,useState} from 'react';
+import { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import productosJson from '../productosJson';
 import Carrusel from './Carrusel';
 import CategorysContainer from './CategorysContainer';
+import { getData } from '../firebase';
+import { collection, getDocs, query, where } from '@firebase/firestore';
+import Loader from './Loader';
 
 
 const useStyles = makeStyles((theme) => ({
     root: {
-        marginTop:4,
-      justifyContent:'center'
+        marginTop: 4,
+        justifyContent: 'center'
     }
-  }));
-    
+}));
 
-function Content() {
-    const [loading, setLoading] = useState(false);
-    const [items,setItems]=useState([]);
+
+const Content = () => {
     const classes = useStyles();
 
-    useEffect(()=>{
+    const [items, setItems] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const db = getData();
 
-        const task = new Promise((resolve, reject) => {
-            /*setLoading(true);*/
-
-            
-            if(productosJson!=null){
-                setTimeout(() => (productosJson), 2000);
-                setItems(productosJson);
-                resolve(productosJson);
-            }else{
-                reject("No se encontro los productos");
+    useEffect(() => {
+        const getProducts = async () => {
+            const productsRef = collection(db, 'products');
+            const productsQuery = query(productsRef, where('stock', '<=', 5));
+            try {
+                const productsSnapshot = await getDocs(productsQuery);
+                const productsList = productsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                console.log(productsList);
+                setItems(productsList);
+            } catch (e) {
+                console.log(e);
             }
-        });
-        /*task.then((fetchitsResponse)=>{Esto seria cuando utilicemos el fetch verdadero
-            console.log();
             setLoading(false);
-            setItems(fetchitsResponse);
-        }).catch((error)=>console.log("error",error));*/
-    },[])
+        }
+        getProducts();
+    }, [])
+
     return (
         <Grid className={classes.root} alignItems='center'>
-            <Carrusel/>
-            <CategorysContainer/>
+            {(items==null || items.length==0)?
+            <Loader condition={loading}/>
+            :
+            <>
+            <Carrusel itemData={items}/>
+            <CategorysContainer />
+            </>
+            }
         </Grid>
     )
 }

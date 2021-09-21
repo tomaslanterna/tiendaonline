@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
@@ -9,13 +8,13 @@ import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import LockOpenIcon from '@material-ui/icons/LockOpen';
 import HomeIcon from '@material-ui/icons/Home';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AppsIcon from '@material-ui/icons/Apps';
 import { NavLink} from 'react-router-dom';
+import userContext from '../contexts/UserContext';
 
 const useStyles = makeStyles((theme)=>({
   list: {
@@ -35,6 +34,7 @@ function SlideMenu() {
   const [swip, setSwipState] = useState([
     { left: false }
   ]);
+  const {userLogin}=useContext(userContext);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (event && event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
@@ -52,17 +52,29 @@ function SlideMenu() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-   
-      <List>
-        {['Home', 'Category','Update'].map((text, index) => (
-          <NavLink exact to={'/'+text.toLowerCase()}>
-          <ListItem button key={text}>
-            <ListItemIcon>{index === 0 ? <HomeIcon /> : <AppsIcon/>}</ListItemIcon>
-            <ListItemText primary={text} />   
-          </ListItem>
-          </NavLink>
-        ))}
-      </List>
+   {(Object.entries(userLogin).length!=0) ?
+   <List>
+   {['Home', 'Category','Update'].map((text, index) => (
+     <NavLink exact to={'/'+text.toLowerCase()}>
+     <ListItem button key={text}>
+       <ListItemIcon>{index === 0 ? <HomeIcon /> : <AppsIcon/>}</ListItemIcon>
+       <ListItemText primary={text} />   
+     </ListItem>
+     </NavLink>
+   ))}
+ </List>
+   :
+   <List>
+    {['Home','SignUp','SignIn'].map((text, index) => (
+      <NavLink exact to={'/'+text.toLowerCase()}>
+      <ListItem button key={text}>
+        <ListItemIcon>{index === 0 ? <HomeIcon /> : <AppsIcon/>}</ListItemIcon>
+        <ListItemText primary={text} />   
+      </ListItem>
+      </NavLink>
+    ))}
+  </List> 
+   }
     </div>
   );
 

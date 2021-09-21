@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import cartContext from './CartContext';
+import cartContext from '../contexts/CartContext';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -9,6 +9,8 @@ import { NavLink,useHistory } from 'react-router-dom';
 import { collection, addDoc, Timestamp, getDocs, query} from "firebase/firestore";
 import { getData } from '../firebase';
 import { FormControl, TextField } from '@material-ui/core';
+import userContext from '../contexts/UserContext';
+
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,11 +46,8 @@ const Cart = () => {
   const classes = useStyles();
   const db = getData();
   const { cart, removeItem,cleanCart } = useContext(cartContext);
-  const [user, setUser] = useState({
-    name: 'Tomas',
-    surname: 'Lanterna',
-    email: 'tomaslanterna@gmail.com'
-  });
+  const {userLogin}=useContext(userContext);
+  const [user, setUser] = useState(userLogin);
 
 
   const getOrderId = async () => {
@@ -69,7 +68,7 @@ const Cart = () => {
 
     const orderCollection = collection(db, 'orders');
     const orderRef = await addDoc(orderCollection, {
-      buyer: user,
+      buyer: user.email,
       items: cart,
       date: Timestamp.fromDate(new Date()),
       total: getTotal(cart)
@@ -98,6 +97,7 @@ const Cart = () => {
   }
   return (
     <>
+    <Typography>Estas comprando como {user.email}</Typography>
       {cart.length > 0 ?
         <>
           <ListCartItems list={cart} />
