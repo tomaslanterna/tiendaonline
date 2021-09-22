@@ -2,9 +2,7 @@ import React, { useState,useContext } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer';
-import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
-import Divider from '@material-ui/core/Divider';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -52,9 +50,9 @@ function SlideMenu() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-   {(Object.entries(userLogin).length!=0) ?
+   {(Object.entries(userLogin).length!==0) ?
    <List>
-   {['Home', 'Category','Update'].map((text, index) => (
+   {['Home','Category','Update'].map((text, index) => (
      <NavLink exact to={'/'+text.toLowerCase()}>
      <ListItem button key={text}>
        <ListItemIcon>{index === 0 ? <HomeIcon /> : <AppsIcon/>}</ListItemIcon>

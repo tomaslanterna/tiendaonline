@@ -7,6 +7,8 @@ import CartWidget from './CartWidget';
 import SlideMenu from './SlideMenu';
 import { NavLink } from 'react-router-dom';
 import userContext from '../contexts/UserContext';
+import tienda from '../images/Tienda.png';
+import { Grid } from '@material-ui/core';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -17,7 +19,8 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     flexGrow: 7,
-  },
+    width:45,
+  }
 }));
 
 const NavBar=()=>{
@@ -29,11 +32,15 @@ const NavBar=()=>{
     <div className={classes.root}>
       <AppBar position="static">
         <Toolbar>
-          <SlideMenu />
-          <Typography variant="h6" className={classes.title}>
-            <NavLink to={{ pathname: "/home" }}>Tienda Online</NavLink>
-          </Typography>
-          {(Object.entries(userLogin).length!=0) ?
+          <Grid container spacing={6}>
+          <Grid item xs={1}>
+            <SlideMenu />
+            </Grid>
+          <Grid item xs={10}>
+            <NavLink to={{ pathname: "/home" }}><img className={classes.title} src={tienda} alt="Tienda Online"/></NavLink>
+          </Grid>
+          <Grid item xs={1}>
+          {(Object.entries(userLogin).length!==0) ?
             <NavLink exact to={"/cart"}>
             <CartWidget />
           </NavLink>
@@ -41,6 +48,13 @@ const NavBar=()=>{
           <>
           </>
           }
+          </Grid>
+          </Grid>
+          
+          <div className={classes.alin}>
+          
+          </div>
+          
         </Toolbar>
       </AppBar>
     </div>

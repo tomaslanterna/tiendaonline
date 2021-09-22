@@ -30,7 +30,7 @@ function ItemDetailContainer() {
 
     return (
         <div>
-            {(Object.entries(itemDetail).length==0)?<Loader condition={loading}/>:<ItemDetail itemDet={itemDetail}/>}
+            {(Object.entries(itemDetail).length===0)?<Loader condition={loading}/>:<ItemDetail itemDet={itemDetail}/>}
         </div>
     )
 }

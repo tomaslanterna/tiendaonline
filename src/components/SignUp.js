@@ -1,10 +1,9 @@
-import React,{useContext, useState} from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '@material-ui/core/Button';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -12,21 +11,22 @@ import Container from '@material-ui/core/Container';
 import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import userContext from '../contexts/UserContext';
+import { NavLink } from 'react-router-dom';
 
 const SignUp = () => {
 
     const theme = createTheme();
     const auth = getAuth();
-    const {userLogin,Login}=useContext(userContext);
-    const [user,setUser]=useState({
-        email:'',
-        password:''
+    const { userLogin, Login } = useContext(userContext);
+    const [user, setUser] = useState({
+        email: '',
+        password: ''
     });
 
-    const onValueChange=(value,key)=>{
+    const onValueChange = (value, key) => {
         setUser({
             ...user,
-            [key]:value
+            [key]: value
         });
     }
 
@@ -85,7 +85,7 @@ const SignUp = () => {
                                     type="password"
                                     name="password"
                                     autoComplete="new-password"
-                                    onChange={evt => onValueChange(evt.target.value,"password")}
+                                    onChange={evt => onValueChange(evt.target.value, "password")}
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -111,9 +111,9 @@ const SignUp = () => {
                         </Button>
                         <Grid container justifyContent="flex-end" className="mt-3">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <NavLink exact to={"/signin"} variant="body2">
                                     Already have an account?Sign in
-                                </Link>
+                                </NavLink>
                             </Grid>
                         </Grid>
                     </Box>

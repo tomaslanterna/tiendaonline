@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles} from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -38,7 +38,7 @@ function Item({ item }) {
   const classes = useStyles();
   const [cant, setCant] = useState(0);
   const { addItem } = useContext(cartContext);
-  console.log(item);
+
 
 
   const onAdd = (cant) => {

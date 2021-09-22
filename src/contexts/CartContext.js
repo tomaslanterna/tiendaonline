@@ -22,7 +22,6 @@ export const CartProvider = ({children}) => {
         const cartDraft=[...cart];
         const cleanCart=checkItem(cartDraft,item)
         setCart(cleanCart);
-        console.log(cleanCart);
     }
 
     const removeItem=(itemId)=>{

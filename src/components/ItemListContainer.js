@@ -1,8 +1,5 @@
-import { Divider, List, ListItem } from '@material-ui/core';
 import { useEffect, useState } from 'react';
-import Grid from '@material-ui/core/Grid';
 import ItemList from './ItemList';
-import productosJson from '../productosJson';
 import { useParams } from 'react-router-dom';
 import { getData } from '../firebase';
 import { collection, getDocs, query, where } from '@firebase/firestore';
@@ -19,7 +16,6 @@ function ItemListContainer() {
             try {
                 const categorySnapshot = await getDocs(categoryQuery);
                 const categoryList = categorySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data()}));
-                console.log(categoryList);
                 setCategory(categoryList);
             } catch(e){
                 console.log(e);

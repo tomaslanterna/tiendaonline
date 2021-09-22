@@ -4,7 +4,6 @@ import ImageList from '@material-ui/core/ImageList';
 import ImageListItem from '@material-ui/core/ImageListItem';
 import ImageListItemBar from '@material-ui/core/ImageListItemBar';
 import IconButton from '@material-ui/core/IconButton';
-import StarBorderIcon from '@material-ui/icons/StarBorder';
 import { NavLink } from 'react-router-dom';
 import Loader from './Loader';
 
@@ -29,55 +28,48 @@ const useStyles = makeStyles((theme) => ({
     background:
       'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
   },
+  stockTitle:{
+    fontFamily:'Stick No Bills',
+  }
 }));
 
 
-function Carrusel({itemData}) {
+function Carrusel({ itemData }) {
   const classes = useStyles();
-  /*const [itemData, setItemData] = useState([]);
   const [loading,setLoading]=useState(true);
-  const db = getData();
 
   useEffect(() => {
-    const getProducts = async () => {
-      const productsRef = collection(db, 'products');
-      const productsQuery = query(productsRef, where('stock', '<=', 5));
-      try {
-        const productsSnapshot = await getDocs(productsQuery);
-        const productsList = productsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        console.log(productsList);
-        setItemData(productsList);
-      } catch (e) {
-        console.log(e);
-      }
-      setLoading(false);
-    }
-    getProducts();
-  }, [])*/
-
+    setLoading(false);
+  }, []);
 
   return (
+    <>
+    <h2 className={classes.stockTitle}>Ultimos Stocks</h2>
     <div className={classes.root}>
       <ImageList className={classes.imageList} cols={3.5}>
-        {itemData.map((item) => (
-          <ImageListItem key={item.img}>
-            <img src={item.imgUrl} alt={item.title} />
-            <NavLink to={{ pathname: "/item-details/" + item.id }}>
-              <ImageListItemBar
-                title={item.title}
-                classes={{
-                  root: classes.titleBar,
-                  title: classes.title,
-                }}
-                actionIcon={
-                  <IconButton aria-label={`star ${item.title}`} />
-                }
-              />
-            </NavLink>
-          </ImageListItem>
-        ))}
+        {(itemData === null || itemData.length === 0) ?
+          <Loader condition={loading} />
+          :
+          itemData.map((item) => (
+            <ImageListItem key={item.img}>
+              <img src={item.imgUrl} alt={item.title} />
+              <NavLink to={{ pathname: "/item-details/" + item.id }}>
+                <ImageListItemBar
+                  title={item.title}
+                  classes={{
+                    root: classes.titleBar,
+                    title: classes.title,
+                  }}
+                  actionIcon={
+                    <IconButton aria-label={`star ${item.title}`} />
+                  }
+                />
+              </NavLink>
+            </ImageListItem>
+          ))}
       </ImageList>
     </div>
+    </>
   );
 }
 

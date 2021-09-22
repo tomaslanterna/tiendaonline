@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
-import productosJson from '../productosJson';
 import Carrusel from './Carrusel';
 import CategorysContainer from './CategorysContainer';
 import { getData } from '../firebase';
@@ -27,11 +26,10 @@ const Content = () => {
     useEffect(() => {
         const getProducts = async () => {
             const productsRef = collection(db, 'products');
-            const productsQuery = query(productsRef, where('stock', '<=', 5));
+            const productsQuery = query(productsRef, where('stock', '<=', 3));
             try {
                 const productsSnapshot = await getDocs(productsQuery);
                 const productsList = productsSnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-                console.log(productsList);
                 setItems(productsList);
             } catch (e) {
                 console.log(e);
@@ -43,7 +41,7 @@ const Content = () => {
 
     return (
         <Grid className={classes.root} alignItems='center'>
-            {(items==null || items.length==0)?
+            {(items===null || items.length===0)?
             <Loader condition={loading}/>
             :
             <>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Item from './Item';
-import { List,ListItem, Grid} from '@material-ui/core';
+import { List,ListItem} from '@material-ui/core';
 import Loader from './Loader';
 
 
@@ -22,7 +22,7 @@ function ItemList({ Items,condition}) {
     return (
       
         <List className={classes.root}>
-            {(Items==null || Items.length==0)? <Loader loading={condition}/>:Items.map(it=><ListItem><Item item={it}/></ListItem>)}
+            {(Items===null || Items.length===0)? <Loader loading={condition}/>:Items.map(it=><ListItem><Item item={it}/></ListItem>)}
             </List>
       
             )

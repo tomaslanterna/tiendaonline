@@ -4,7 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
+import { NavLink } from 'react-router-dom';
 import Grid from '@material-ui/core/Grid';
 import Box from '@material-ui/core/Box';
 import Typography from '@material-ui/core/Typography';
@@ -36,13 +36,12 @@ const SignIn = () => {
         signInWithEmailAndPassword(auth, user.email, user.password)
             .then((userCredential) => {
                 Login(userCredential._tokenResponse);
-                console.log(userCredential._tokenResponse);
                 history.push("/");
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
-                return alert(errorMessage);
+                return alert("Usuario y/o contraseña incorrecto, vuelve a intentarlo");
             });
 
     }
@@ -64,7 +63,7 @@ const SignIn = () => {
                     <Typography component="h1" variant="h5">
                         Sign In
                     </Typography>
-                    <Box component="form" noValidate /*onSubmit={handleSubmit}*/ sx={{ mt: 3 }}>
+                    <Box component="form" noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
@@ -91,7 +90,6 @@ const SignIn = () => {
                             </Grid>
                         </Grid>
                         <Button
-                            /*type="submit"*/
                             fullWidth
                             variant="contained"
                             className="mt-3"
@@ -101,9 +99,9 @@ const SignIn = () => {
                         </Button>
                         <Grid container justifyContent="flex-end" className="mt-3">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <NavLink exact to={"/signup"} variant="body2">
                                     Don't have an account? Sign Up
-                                </Link>
+                                </NavLink>
                             </Grid>
                         </Grid>
                     </Box>
