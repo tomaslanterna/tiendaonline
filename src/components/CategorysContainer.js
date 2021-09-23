@@ -4,7 +4,7 @@ import SportWear from '../images/SportWear.jpg';
 import Tecnology from '../images/TECNOLOGIA.jpg';
 import UrbanWear from '../images/UrbanWear.jpg';
 
-function CategorysContainer() {
+const CategorysContainer=()=>{
     return (
         <div>
             <CategoryType img={Tecnology} id={"1"}/>

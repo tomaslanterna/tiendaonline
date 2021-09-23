@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import cartContext from '../contexts/CartContext';
 import { makeStyles } from '@material-ui/core/styles';
 import List from '@material-ui/core/List';
@@ -62,6 +62,13 @@ const Cart = () => {
   const { cart, removeItem, cleanCart } = useContext(cartContext);
   const { userLogin } = useContext(userContext);
   const [user] = useState(userLogin);
+
+  useEffect(() => {
+    if(Object.entries(userLogin).length===0){
+      return history.push("/");
+    }
+    
+  }, [])
 
 
   const handleBuy = async () => {

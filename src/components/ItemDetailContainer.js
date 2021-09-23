@@ -5,7 +5,7 @@ import { collection, getDocs, query} from '@firebase/firestore';
 import { getData } from '../firebase';
 import Loader from './Loader';
 
-function ItemDetailContainer() {
+const ItemDetailContainer=()=>{
     const [itemDetail, setitemDetail] = useState({});
     const {idProduct}=useParams();
     const [loading,setLoading]=useState(true);

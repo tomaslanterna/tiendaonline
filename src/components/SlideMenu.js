@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme)=>({
   }
 }));
 
-function SlideMenu() {
+const SlideMenu=()=>{
   const classes = useStyles();
   const [path,setPath]=useState('');
   const [swip, setSwipState] = useState([

@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
 
 }));
 
-function CategoryType({ img, id }) {
+const CategoryType=({ img, id })=>{
     const classes = useStyles();
     return (
         <div>

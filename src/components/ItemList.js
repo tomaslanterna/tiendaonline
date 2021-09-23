@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function ItemList({ Items,condition}) {
+const ItemList=({ Items,condition})=>{
     const classes = useStyles();
     return (
       

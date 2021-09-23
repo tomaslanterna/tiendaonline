@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-function Carrusel({ itemData }) {
+const Carrusel=({ itemData })=>{
   const classes = useStyles();
   const [loading,setLoading]=useState(true);
 

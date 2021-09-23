@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Item({ item }) {
+const Item=({ item })=>{
   const classes = useStyles();
   const [cant, setCant] = useState(0);
   const { addItem } = useContext(cartContext);

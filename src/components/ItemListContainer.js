@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { getData } from '../firebase';
 import { collection, getDocs, query, where } from '@firebase/firestore';
 
-function ItemListContainer() {
+const ItemListContainer=()=>{
     const [category, setCategory] = useState([]);
     const [loading,setLoading]=useState(true);
     const { id } = useParams();

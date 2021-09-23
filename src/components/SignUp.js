@@ -12,12 +12,14 @@ import { createTheme, ThemeProvider } from '@material-ui/core/styles';
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import userContext from '../contexts/UserContext';
 import { NavLink } from 'react-router-dom';
+import { useHistory } from 'react-router';
 
 const SignUp = () => {
 
     const theme = createTheme();
     const auth = getAuth();
     const { userLogin, Login } = useContext(userContext);
+    const history=useHistory();
     const [user, setUser] = useState({
         email: '',
         password: ''
@@ -35,12 +37,13 @@ const SignUp = () => {
         createUserWithEmailAndPassword(auth, user.email, user.password)
             .then((userCredential) => {
                 Login(userCredential);
+                history.push("/");
             })
             .catch((error) => {
                 const errorCode = error.code;
                 const errorMessage = error.message;
                 console.log(errorMessage);
-                // ..
+                return alert("No se pudo realizar el registro");
             });
 
     }
@@ -63,7 +66,7 @@ const SignUp = () => {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate /*onSubmit={handleSubmit}*/ sx={{ mt: 3 }}>
+                    <Box component="form" noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12}>
                                 <TextField
@@ -101,7 +104,6 @@ const SignUp = () => {
                             </Grid>
                         </Grid>
                         <Button
-                            /*type="submit"*/
                             fullWidth
                             variant="contained"
                             className="mt-3"
