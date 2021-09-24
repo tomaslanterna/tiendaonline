@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import Button from '@material-ui/core/Button';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Avatar from '@material-ui/core/Avatar';
@@ -18,12 +18,13 @@ const SignUp = () => {
 
     const theme = createTheme();
     const auth = getAuth();
-    const { userLogin, Login } = useContext(userContext);
+    const { Login } = useContext(userContext);
     const history=useHistory();
     const [user, setUser] = useState({
         email: '',
         password: ''
     });
+
 
     const onValueChange = (value, key) => {
         setUser({
@@ -114,7 +115,7 @@ const SignUp = () => {
                         <Grid container justifyContent="flex-end" className="mt-3">
                             <Grid item>
                                 <NavLink exact to={"/signin"} variant="body2">
-                                    Already have an account?Sign in
+                                    Ya tienes una cuenta? click aqui.
                                 </NavLink>
                             </Grid>
                         </Grid>
