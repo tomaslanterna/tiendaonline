@@ -42,10 +42,7 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
   },
   count: {
-    height: 300,
-    display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'center',
+    marginTop:150
   }
 }));
 
@@ -78,7 +75,9 @@ const ItemDetail=({ itemDet })=>{
             className={classes.cover}
             image={itemDet.imgUrl}
             title="Product" />
-          <ItemCount onAdd={onAdd} stock={itemDet.stock}/>
+            <div className={classes.count}>
+            <ItemCount onAdd={onAdd} stock={itemDet.stock}/>
+            </div>
         </div>
       </Card>
       <Card className={classes.root2}>

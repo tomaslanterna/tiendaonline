@@ -36,6 +36,8 @@ const SignIn = () => {
         signInWithEmailAndPassword(auth, user.email, user.password)
             .then((userCredential) => {
                 Login(userCredential._tokenResponse);
+                sessionStorage.setItem('Login',JSON.stringify(userCredential._tokenResponse.email));
+                console.log(sessionStorage.getItem('Login'));
                 history.push("/");
             })
             .catch((error) => {
@@ -93,6 +95,7 @@ const SignIn = () => {
                             fullWidth
                             variant="contained"
                             className="mt-3"
+                            color="primary"
                             onClick={setLogin}
                         >
                             Sign In

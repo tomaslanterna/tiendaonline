@@ -108,6 +108,7 @@ const SignUp = () => {
                             fullWidth
                             variant="contained"
                             className="mt-3"
+                            color="primary"
                             onClick={register}
                         >
                             Sign Up
