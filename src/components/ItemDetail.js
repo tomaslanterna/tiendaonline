@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Grid } from '@material-ui/core';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -7,19 +7,22 @@ import Typography from '@material-ui/core/Typography';
 import ItemCount from './ItemCount';
 import cartContext from '../contexts/CartContext';
 
+
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    width: 850,
-    height: 300,
-    marginTop: 10
+    width: 800,
+    height: 350,
+    marginTop: 10,
+    marginLeft: 220
   },
   root2: {
     display: 'flex',
     flexDirection: 'column',
-    width: 850,
+    width: 800,
     height: 150,
-    marginTop: 10
+    marginTop: 10,
+    marginLeft: 220
   },
   details: {
     display: 'flex',
@@ -28,12 +31,15 @@ const useStyles = makeStyles((theme) => ({
   content: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginRight:200,
+    marginLeft:50
   },
   cover: {
     display: 'flex',
     flexDirection: 'column',
     width: 300,
+    height:300
   },
   controls: {
     display: 'flex',
@@ -42,11 +48,11 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: theme.spacing(1),
   },
   count: {
-    marginTop:150
+    marginTop: 150
   }
 }));
 
-const ItemDetail=({ itemDet })=>{
+const ItemDetail = ({ itemDet }) => {
   const classes = useStyles();
   const [cant, setCant] = useState(0);
   const { addItem } = useContext(cartContext);
@@ -63,30 +69,39 @@ const ItemDetail=({ itemDet })=>{
 
   return (
 
-    <div>
-      <Card className={classes.root}>
-        <div className={classes.details}>
-          <CardContent className={classes.content}>
-            <Typography component="h5" variant="h5">
-              {itemDet.title}
-            </Typography>
-          </CardContent>
-          <CardMedia
-            className={classes.cover}
-            image={itemDet.imgUrl}
-            title="Product" />
-            <div className={classes.count}>
-            <ItemCount onAdd={onAdd} stock={itemDet.stock}/>
+    <Grid container>
+      <Grid item xs={11}>
+        <Card className={classes.root}>
+          <div className={classes.details}>
+            <CardContent className={classes.content}>
+              <Typography component="h5" variant="h5">
+                {itemDet.title}
+              </Typography>
+            </CardContent>
+            <div>
+              <div>
+                <CardMedia
+                  className={classes.cover}
+                  image={itemDet.imgUrl}
+                  title="Product" 
+                  />
+              </div>
+              <div>
+                <ItemCount onAdd={onAdd} stock={itemDet.stock} />
+              </div>
             </div>
-        </div>
-      </Card>
-      <Card className={classes.root2}>
-        <Typography variant="subtitle1 h3" color="textSecondary">
-          Detalles :
-        </Typography>
-        <p>{itemDet.details}</p>
-      </Card>
-    </div>
+          </div>
+        </Card>
+      </Grid>
+      <Grid item xs={11}>
+        <Card className={classes.root2}>
+          <Typography variant="subtitle1 h3" color="textSecondary">
+            Detalles :
+          </Typography>
+          <p>{itemDet.details}</p>
+        </Card>
+      </Grid>
+    </Grid>
 
   );
 }
