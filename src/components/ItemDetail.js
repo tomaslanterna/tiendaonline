@@ -13,16 +13,17 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     width: 800,
     height: 350,
-    marginTop: 10,
-    marginLeft: 220
+    margin:10,
+    justifyContent:'center'
+    
   },
   root2: {
     display: 'flex',
     flexDirection: 'column',
     width: 800,
     height: 150,
-    marginTop: 10,
-    marginLeft: 220
+    margin: 10,
+    justifyContent:'center'
   },
   details: {
     display: 'flex',
@@ -47,8 +48,8 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
-  count: {
-    marginTop: 150
+  align: {
+    justifyContent:'center'
   }
 }));
 
@@ -69,8 +70,8 @@ const ItemDetail = ({ itemDet }) => {
 
   return (
 
-    <Grid container>
-      <Grid item xs={11}>
+    <Grid container className={classes.align}>
+      <Grid container xs={8} className={classes.align}>
         <Card className={classes.root}>
           <div className={classes.details}>
             <CardContent className={classes.content}>
@@ -93,7 +94,7 @@ const ItemDetail = ({ itemDet }) => {
           </div>
         </Card>
       </Grid>
-      <Grid item xs={11}>
+      <Grid container xs={8} className={classes.align}>
         <Card className={classes.root2}>
           <Typography variant="subtitle1 h3" color="textSecondary">
             Detalles :

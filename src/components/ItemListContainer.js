@@ -3,6 +3,7 @@ import ItemList from './ItemList';
 import { useParams } from 'react-router-dom';
 import { getData } from '../firebase';
 import { collection, getDocs, query, where } from '@firebase/firestore';
+import { Grid } from '@material-ui/core';
 
 const ItemListContainer=()=>{
     const [category, setCategory] = useState([]);
@@ -27,7 +28,7 @@ const ItemListContainer=()=>{
 
 
     return (
-        <ItemList Items={category} condition={loading}/>
+            <ItemList Items={category} condition={loading}/>
     )
 }
 

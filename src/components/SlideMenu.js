@@ -9,7 +9,6 @@ import ListItemText from '@material-ui/core/ListItemText';
 import HomeIcon from '@material-ui/icons/Home';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AppsIcon from '@material-ui/icons/Apps';
 import { NavLink} from 'react-router-dom';
 import userContext from '../contexts/UserContext';
@@ -23,12 +22,15 @@ const useStyles = makeStyles((theme)=>({
   },
   menuButton: {
     marginRight: theme.spacing(2),
+  },
+  align:{
+    justifyContent:'start',
+    width:100
   }
 }));
 
 const SlideMenu=()=>{
   const classes = useStyles();
-  const [path,setPath]=useState('');
   const [swip, setSwipState] = useState([
     { left: false }
   ]);
@@ -77,7 +79,7 @@ const SlideMenu=()=>{
   );
 
   return (
-    <div>
+    <div className={classes.align}>
       {['left'].map((anchor) => (
         <React.Fragment key={anchor}>
           <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu" onClick={toggleDrawer(anchor, true)}>

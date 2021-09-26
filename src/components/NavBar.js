@@ -8,8 +8,10 @@ import SlideMenu from './SlideMenu';
 import { NavLink } from 'react-router-dom';
 import userContext from '../contexts/UserContext';
 import tienda from '../images/Tienda.png';
-import { Button, Grid } from '@material-ui/core';
+import { Button, Grid,IconButton } from '@material-ui/core';
 import { useHistory } from 'react-router';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -22,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 7,
     width: 45,
+  },
+  align:{
+    justifyContent:'center'
   }
+
 }));
 
 const NavBar = () => {
@@ -40,21 +46,18 @@ const NavBar = () => {
       <AppBar position="fixed">
         <Toolbar>
           <Grid container spacing={6}>
-            <Grid item xs={1}>
+            <Grid item xs={2} justifyContent="start">
               <SlideMenu />
             </Grid>
-            <Grid item xs={9}>
+            <Grid item xs={8} className={classes.align}>
               <NavLink to={{ pathname: "/home" }}><img className={classes.title} src={tienda} alt="Tienda Online" /></NavLink>
             </Grid>
             <Grid item xs={2}>
               {(Object.entries(userLogin).length !== 0) ?
                 <>
-                  <Button size="small"
-                    variant="contained"
-                    color="primary"
-                    onClick={SignOut}>
-                    Logout
-                  </Button>
+                <IconButton onClick={SignOut}>
+                  <ExitToAppIcon/>
+                </IconButton>
                   <NavLink exact to={"/cart"}>
                     <CartWidget />
                   </NavLink>
