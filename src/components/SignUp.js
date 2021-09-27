@@ -18,7 +18,6 @@ const SignUp = () => {
 
     const theme = createTheme();
     const auth = getAuth();
-    const { Login } = useContext(userContext);
     const history=useHistory();
     const [user, setUser] = useState({
         email: '',
@@ -38,8 +37,8 @@ const SignUp = () => {
             if(user.passwordConfirm===user.password){
                 createUserWithEmailAndPassword(auth, user.email, user.password)
                 .then((userCredential) => {
-                    Login(userCredential);
-                    history.push("/");
+                    alert("Registro realizado correctamente");
+                    history.push("/signin");
                 })
                 .catch((error) => {
                     const errorCode = error.code;
