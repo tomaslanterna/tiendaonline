@@ -2,13 +2,11 @@ import React, { useContext } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import CartWidget from './CartWidget';
 import SlideMenu from './SlideMenu';
 import { NavLink } from 'react-router-dom';
 import userContext from '../contexts/UserContext';
-import tienda from '../images/Tienda.png';
-import { Button, Grid,IconButton } from '@material-ui/core';
+import { Grid,IconButton } from '@material-ui/core';
 import { useHistory } from 'react-router';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
@@ -50,7 +48,7 @@ const NavBar = () => {
               <SlideMenu />
             </Grid>
             <Grid item xs={8} className={classes.align}>
-              <NavLink to={{ pathname: "/" }}><img className={classes.title} src={tienda} alt="Tienda Online" /></NavLink>
+              <NavLink to={{ pathname: "/" }}><img className={classes.title} src={"https://firebasestorage.googleapis.com/v0/b/tiendaonline-ad1a6.appspot.com/o/Tienda.png?alt=media&token=07ed8a0a-8cf2-4ede-94b2-3187fb622d3c"} alt="Tienda Online" /></NavLink>
             </Grid>
             <Grid item xs={2}>
               {(Object.entries(userLogin).length !== 0) ?
