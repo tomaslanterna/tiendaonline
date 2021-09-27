@@ -20,16 +20,20 @@ const useStyles = makeStyles((theme) => ({
   details: {
     display: 'flex',
     flexDirection: 'row',
-    width: 900,
-    height: 250
+    width: 1200,
+    height: 250,
   },
   content: {
-    flex: '1 0 auto',
+    flex: '2 0 auto'
   },
   cover: {
     display: 'flex',
     flexDirection: 'row',
-    width: 150,
+    width: 300,
+    margin:5
+  },
+  cover2:{
+    width:'100%'
   },
   controls: {
     display: 'flex',
@@ -98,7 +102,6 @@ const Cart = () => {
           <CardContent className={classes.content}>
             <List>
               <ListItem><Typography>{it.item.title}</Typography></ListItem>
-              <ListItem><Typography>Detalles:{it.item.details}</Typography></ListItem>
               <ListItem>Precio:{it.item.price}</ListItem>
               <ListItem>Cantidad seleccionado:{it.count}</ListItem>
               <ListItem><Button size="small"
@@ -111,10 +114,9 @@ const Cart = () => {
               </ListItem>
             </List>
           </CardContent>
-          <CardMedia
-            className={classes.cover}
-            image={it.item.imgUrl}
-            title="Product" />
+          <div className={classes.cover}>
+            <img src={it.item.imgUrl} alt={it.item.title} className={classes.cover2}/>
+          </div>
         </div>
 
       </Card>));
