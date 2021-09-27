@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams,useHistory } from 'react-router-dom';
 import ItemDetail from './ItemDetail';
 import { collection, getDocs, query} from '@firebase/firestore';
 import { getData } from '../firebase';
@@ -9,6 +9,7 @@ const ItemDetailContainer=()=>{
     const [itemDetail, setitemDetail] = useState({});
     const {idProduct}=useParams();
     const [loading,setLoading]=useState(true);
+    const history=useHistory();
 
     useEffect(() => {
         const getItemDetail = async () => {
@@ -22,6 +23,7 @@ const ItemDetailContainer=()=>{
                 setitemDetail(itemDet);
             } catch(e){
                 console.log(e);
+                history.push("/404");
             }
             setLoading(false);
         };

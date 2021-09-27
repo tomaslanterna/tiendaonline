@@ -18,3 +18,16 @@ Correr la aplicacion localmente
 
 Para buldiear la app en modo de produccion
 
+## Usuario de prueba
+
+User: prueba@gmail.com
+Psw:123456789
+
+## Librerias exteriores utilizadas
+
+Se utilizo Material UI para la realizacion de este proyecto
+Versiones:
+
+material-ui/core: 4.12.2,
+material-ui/icons: 4.11.2,
+mui/material: 5.0.1

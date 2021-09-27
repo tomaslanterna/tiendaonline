@@ -1,5 +1,4 @@
-import React, { useContext } from 'react'
-import carrito from '../images/cart4.png'
+import React, { useContext } from 'react';
 import { Button } from '@material-ui/core';
 import { Badge } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -19,7 +18,7 @@ const CartWidget=() =>{
     return (
         <>
             <Button color="inherit">
-                <img src={carrito} alt="Cart"/>
+                <img src={"https://firebasestorage.googleapis.com/v0/b/tiendaonline-ad1a6.appspot.com/o/cart4.png?alt=media&token=8bd4b699-9210-41ce-a860-b1daaa76f351"} alt="Cart"/>
                 <StyledBadge badgeContent={cart.length} color="secondary"></StyledBadge>
             </Button>
         </>

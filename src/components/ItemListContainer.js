@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import ItemList from './ItemList';
-import { useParams } from 'react-router-dom';
+import { useParams,useHistory } from 'react-router-dom';
 import { getData } from '../firebase';
 import { collection, getDocs, query, where } from '@firebase/firestore';
 import { Grid } from '@material-ui/core';
@@ -9,6 +9,8 @@ const ItemListContainer=()=>{
     const [category, setCategory] = useState([]);
     const [loading,setLoading]=useState(true);
     const { id } = useParams();
+    const history=useHistory();
+
     useEffect(() => {
         const getCategory = async () => {
             const db = getData();
@@ -20,6 +22,7 @@ const ItemListContainer=()=>{
                 setCategory(categoryList);
             } catch(e){
                 console.log(e);
+                history.push("/404");
             }
             setLoading(false);
         };

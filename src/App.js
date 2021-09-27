@@ -11,6 +11,7 @@ import Subirarchivos from './components/Subirarchivos';
 import SignUp from './components/SignUp';
 import SignIn from './components/SignIn';
 import { UserProvider } from './contexts/UserContext';
+import NotFound from './components/NotFound';
 
 
 
@@ -29,9 +30,10 @@ function App() {
                 <Route path="/category" component={CategorysContainer} />
                 <Route exact to path="/item-details/:idProduct" component={ItemDetailContainer} />
                 <Route path="/cart" component={Cart} />
-                <Route path="/update" component={Subirarchivos} />
+                {/*<Route path="/update" component={Subirarchivos} />*/}
                 <Route path="/signup" component={SignUp} />
                 <Route path="/signin" component={SignIn} />
+                <Route path="/404" component={NotFound} />
               </Switch>
             </section>
           </Router>

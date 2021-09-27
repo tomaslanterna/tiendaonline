@@ -12,6 +12,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AppsIcon from '@material-ui/icons/Apps';
 import { NavLink} from 'react-router-dom';
 import userContext from '../contexts/UserContext';
+import { LockOpen,VpnKey } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme)=>({
   list: {
@@ -54,7 +55,7 @@ const SlideMenu=()=>{
     >
    {(Object.entries(userLogin).length!==0) ?
    <List>
-   {['Home','Category','Update'].map((text, index) => (
+   {['Home','Category'].map((text, index) => (
      <NavLink exact to={'/'+text.toLowerCase()}>
      <ListItem button key={text}>
        <ListItemIcon>{index === 0 ? <HomeIcon /> : <AppsIcon/>}</ListItemIcon>
@@ -65,10 +66,10 @@ const SlideMenu=()=>{
  </List>
    :
    <List>
-    {['Home','SignUp','SignIn'].map((text, index) => (
+    {['Home','Category','SignUp','SignIn'].map((text, index) => (
       <NavLink exact to={'/'+text.toLowerCase()}>
       <ListItem button key={text}>
-        <ListItemIcon>{index === 0 ? <HomeIcon /> : <AppsIcon/>}</ListItemIcon>
+        <ListItemIcon>{index === 0 ? <HomeIcon /> : index === 1 ? <AppsIcon /> :index === 2 ? <VpnKey /> :<LockOpen/>}</ListItemIcon>
         <ListItemText primary={text} />   
       </ListItem>
       </NavLink>

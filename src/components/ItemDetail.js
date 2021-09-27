@@ -13,17 +13,17 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     width: 800,
     height: 350,
-    margin:10,
-    justifyContent:'center'
-    
+    margin: 10,
+    justifyContent: 'center'
+
   },
   root2: {
     display: 'flex',
     flexDirection: 'column',
     width: 800,
-    height: 150,
+    height: 170,
     margin: 10,
-    justifyContent:'center'
+    justifyContent: 'center'
   },
   details: {
     display: 'flex',
@@ -33,23 +33,25 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-    marginRight:200,
-    marginLeft:50
+    marginRight: 200,
+    marginLeft: 50
   },
   cover: {
-    display: 'flex',
+    display: 'block',
     flexDirection: 'column',
     width: 300,
-    height:300
+    height: 300,
+    margin: 5
+  },
+  cover2: {
+    width: '100%'
   },
   controls: {
-    display: 'flex',
-    alignItems: 'center',
-    paddingLeft: theme.spacing(1),
-    paddingBottom: theme.spacing(1),
+    padding:20,
+    marginTop: 10
   },
   align: {
-    justifyContent:'center'
+    justifyContent: 'center'
   }
 }));
 
@@ -80,12 +82,8 @@ const ItemDetail = ({ itemDet }) => {
               </Typography>
             </CardContent>
             <div>
-              <div>
-                <CardMedia
-                  className={classes.cover}
-                  image={itemDet.imgUrl}
-                  title="Product" 
-                  />
+              <div className={classes.cover}>
+                <img src={itemDet.imgUrl} className={classes.cover2} alt={itemDet.title} />
               </div>
               <div>
                 <ItemCount onAdd={onAdd} stock={itemDet.stock} />
@@ -96,10 +94,12 @@ const ItemDetail = ({ itemDet }) => {
       </Grid>
       <Grid container xs={8} className={classes.align}>
         <Card className={classes.root2}>
-          <Typography variant="subtitle1 h3" color="textSecondary">
-            Detalles :
-          </Typography>
-          <p>{itemDet.details}</p>
+          <div className={classes.controls}>
+            <Typography variant="subtitle1 h3" color="textSecondary">
+              Detalles :
+            </Typography>
+            <p>{itemDet.details}</p>
+          </div>
         </Card>
       </Grid>
     </Grid>

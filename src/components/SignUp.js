@@ -22,7 +22,8 @@ const SignUp = () => {
     const history=useHistory();
     const [user, setUser] = useState({
         email: '',
-        password: ''
+        password: '',
+        passwordConfirm:''
     });
 
 
@@ -34,19 +35,21 @@ const SignUp = () => {
     }
 
     const register = () => {
-        console.log(user);
-        createUserWithEmailAndPassword(auth, user.email, user.password)
-            .then((userCredential) => {
-                Login(userCredential);
-                history.push("/");
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorMessage);
-                return alert("No se pudo realizar el registro");
-            });
-
+            if(user.passwordConfirm===user.password){
+                createUserWithEmailAndPassword(auth, user.email, user.password)
+                .then((userCredential) => {
+                    Login(userCredential);
+                    history.push("/");
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    console.log(errorMessage);
+                    alert("No se pudo realizar el registro");
+                });
+            }else{
+                return alert("Las contraseñas deben ser iguales");
+            }
     }
 
     return (
@@ -96,11 +99,12 @@ const SignUp = () => {
                                 <TextField
                                     required
                                     fullWidth
-                                    name="password"
+                                    key="passwordConfirm"
                                     label="Confirm Password"
                                     type="password"
-                                    name="password"
+                                    name="passwordConfirm"
                                     autoComplete="new-password"
+                                    onChange={evt => onValueChange(evt.target.value, "passwordConfirm")}
                                 />
                             </Grid>
                         </Grid>

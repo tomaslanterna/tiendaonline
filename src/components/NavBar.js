@@ -50,7 +50,7 @@ const NavBar = () => {
               <SlideMenu />
             </Grid>
             <Grid item xs={8} className={classes.align}>
-              <NavLink to={{ pathname: "/home" }}><img className={classes.title} src={tienda} alt="Tienda Online" /></NavLink>
+              <NavLink to={{ pathname: "/" }}><img className={classes.title} src={tienda} alt="Tienda Online" /></NavLink>
             </Grid>
             <Grid item xs={2}>
               {(Object.entries(userLogin).length !== 0) ?

@@ -24,7 +24,11 @@ const useStyles = makeStyles((theme) => ({
   cover: {
     display: 'flex',
     flexDirection: 'row',
-    width: 200,
+    width: 170,
+    margin:5
+  },
+  cover2:{
+    width:'100%'
   },
   controls: {
     display: 'flex',
@@ -66,10 +70,9 @@ const Item=({ item })=>{
           </Typography>
           <ItemCount onAdd={onAdd} stock={item.stock}/>
         </CardContent>
-        <CardMedia
-          className={classes.cover}
-          image={item.imgUrl}
-          title="Product" />
+        <div className={classes.cover}>
+        <img src={item.imgUrl} className={classes.cover2}/>
+        </div>
       </div>
 
 
