@@ -36,6 +36,14 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },
+  link:{
+    outline:'none',
+    textDecoration:'none',
+  },
+  font:{
+    fontFamily:'Stick No Bills',
+    color:'black'
+  }
 }));
 
 const Item=({ item })=>{
@@ -60,8 +68,8 @@ const Item=({ item })=>{
     <Card className={classes.root}>
       <div className={classes.details}>
         <CardContent className={classes.content}>
-          <NavLink activeClassName="active" to={{ pathname: "/item-details/" + item.id }}>
-            <Typography component="h5" variant="h5">
+          <NavLink className={classes.link} activeClassName="active" to={{ pathname: "/item-details/" + item.id }}>
+            <Typography component="h5" variant="h5" className={classes.font}>
               {item.title}
             </Typography>
           </NavLink>

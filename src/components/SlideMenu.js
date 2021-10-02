@@ -27,6 +27,14 @@ const useStyles = makeStyles((theme)=>({
   align:{
     justifyContent:'start',
     width:100
+  },
+  link:{
+    outline:'none',
+    textDecoration:'none',
+  },
+  font:{
+    fontFamily:'Stick No Bills',
+    color:'black'
   }
 }));
 
@@ -56,10 +64,10 @@ const SlideMenu=()=>{
    {(Object.entries(userLogin).length!==0) ?
    <List>
    {['Home','Category'].map((text, index) => (
-     <NavLink exact to={'/'+text.toLowerCase()}>
+     <NavLink className={classes.link} exact to={'/'+text.toLowerCase()}>
      <ListItem button key={text}>
        <ListItemIcon>{index === 0 ? <HomeIcon /> : <AppsIcon/>}</ListItemIcon>
-       <ListItemText primary={text} />   
+       <ListItemText className={classes.font} primary={text}/>  
      </ListItem>
      </NavLink>
    ))}
@@ -67,10 +75,10 @@ const SlideMenu=()=>{
    :
    <List>
     {['Home','Category','SignUp','SignIn'].map((text, index) => (
-      <NavLink exact to={'/'+text.toLowerCase()}>
+      <NavLink className={classes.link} exact to={'/'+text.toLowerCase()}>
       <ListItem button key={text}>
         <ListItemIcon>{index === 0 ? <HomeIcon /> : index === 1 ? <AppsIcon /> :index === 2 ? <VpnKey /> :<LockOpen/>}</ListItemIcon>
-        <ListItemText primary={text} />   
+        <ListItemText className={classes.font} primary={text} />   
       </ListItem>
       </NavLink>
     ))}
